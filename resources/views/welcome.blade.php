@@ -84,7 +84,7 @@
                     Laravel
                 </div>
 
-                <a href="{{route('')}}">Back to home page</a>
+                <a href="{{route('address.create')}}">add address</a>
 
             </div>
         </div>

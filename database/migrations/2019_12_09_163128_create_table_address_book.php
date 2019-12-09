@@ -18,6 +18,7 @@ class CreateTableAddressBook extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('address');
+            $table->integer('house_number');
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

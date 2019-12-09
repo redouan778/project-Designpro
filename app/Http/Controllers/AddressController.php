@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\AddressBook;
 
 class AddressController extends Controller
 {
@@ -36,18 +37,22 @@ class AddressController extends Controller
     {
         $request->validate([
             'name'=>'required',
-            'description'=>'required',
-            'price'=>'required|numeric',
+            'address'=>'required',
+            'house_number' => 'required',
         ]);
 
-        $product = new Product([
+        $address = new AddressBook([
             'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'price' => $request->get('price'),
-
+            'address' => $request->get('address'),
+            'house_number' => $request->get('house_number'),
+            'user_id' => 1
         ]);
 
-        $product->save();
+//        dd($address);
+
+        $address->save();
+        return redirect('/');
+
     }
 
     /**
