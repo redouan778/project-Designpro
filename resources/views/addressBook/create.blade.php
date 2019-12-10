@@ -1,16 +1,18 @@
 @extends('layouts.app')
 @section('content')
+
+
 <form action="{{route('address.store')}}" method="POST" class="form-horizontal">
     {{ csrf_field() }}
 
     <div class="col-sm-6">
         <label for="name"  class="col-sm-2 control-label">Name</label>
-        <input type="text"  name="name" class="form-control" id="name" placeholder="Address">
+        <input   name="name" class="form-control" id="name" placeholder="Address">
     </div>
 
     <div class="col-sm-6">
         <label for="address"  class="col-sm-2 control-label">Address</label>
-        <input type="text"  name="address" class="form-control" id="address" placeholder="Address">
+        <input   name="address" class="form-control" id="address" placeholder="Address only">
     </div>
 
     <div class="col-sm-6">

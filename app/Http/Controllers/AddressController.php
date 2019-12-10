@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AddressBook;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,10 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        $address = AddressBook::where('user_id', Auth::id())->get();
+
+        return view('home', compact('address'));
+
     }
 
     /**
@@ -24,7 +32,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        return view('addressBook.create');
+//        return view('addressBook.create');
     }
 
     /**
@@ -36,34 +44,21 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'address'=>'required',
-            'house_number' => 'required',
+            'name'=>'required|alpha',
+            'address'=>'required|alpha',
+            'house_number' => 'numeric|min:1'
         ]);
 
         $address = new AddressBook([
             'name' => $request->get('name'),
             'address' => $request->get('address'),
             'house_number' => $request->get('house_number'),
-            'user_id' => 1
+            'user_id' =>  Auth::id()
         ]);
 
-//        dd($address);
-
         $address->save();
-        return redirect('/');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect('/index');
     }
 
     /**
@@ -86,7 +81,7 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo 'd';
     }
 
     /**
@@ -97,6 +92,9 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $address = AddressBook::find($id);
+        $address->delete();
+
+        return redirect('/index');
     }
 }

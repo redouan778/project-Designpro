@@ -81,11 +81,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Designpro login!
                 </div>
-
-                <a href="{{route('address.create')}}">add address</a>
-
             </div>
         </div>
     </body>
