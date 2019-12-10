@@ -68,7 +68,7 @@ class AddressController extends Controller
     {
         $address = AddressBook::find($id);
 
-        return view('/addressBook.edit',compact('address'));
+        return view('/addressBook.edit'c,compact('address'));
 
     }
 
