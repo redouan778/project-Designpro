@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/index', 'AddressController@index')->name('index');
 
 Route::resource('address', 'AddressController', ['except' => ['index']]);

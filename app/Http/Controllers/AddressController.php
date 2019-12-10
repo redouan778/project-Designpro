@@ -26,16 +26,6 @@ class AddressController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-//        return view('addressBook.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -69,7 +59,10 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        //
+        $address = AddressBook::find($id);
+
+        return view('/addressBook.edit',compact('address'));
+
     }
 
     /**
@@ -81,6 +74,22 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name'=>'required|alpha',
+            'address'=>'required|alpha',
+            'house_number' => 'numeric|min:1'
+        ]);
+
+        $address = AddressBook::find($id);
+
+        $address->name = $request->name;
+        $address->address = $request->address;
+        $address->house_number = $request->house_number;
+
+
+        $address->save();
+
+        return redirect('/index');
     }
 
     /**
