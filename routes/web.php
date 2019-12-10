@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', 'AddressController@index')->name('index');
+
+Route::resource('address', 'AddressController', ['except' => ['index']]);
+
+Auth::routes();
