@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AddressBook;
 use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Input;
 
 class AddressController extends Controller
 {
@@ -36,20 +37,26 @@ class AddressController extends Controller
         $request->validate([
             'name'=>'required|alpha',
             'address'=>'required|alpha',
-            'house_number' => 'numeric|min:1'
+            'house_number' => 'numeric|min:1',
         ]);
 
         $address = new AddressBook([
             'name' => $request->get('name'),
             'address' => $request->get('address'),
             'house_number' => $request->get('house_number'),
-            'user_id' =>  Auth::id()
+            'user_id' =>  Auth::id(),
         ]);
 
-        $address->save();
+        if (AddressBook::where('address',  $request->get('address'))->exists()) {
+            echo 'Im sorry the Address already exist' ;
+        }else{
+            $address->save();
+        }
 
-        return redirect('/index');
+        return redirect('/index')->with('message', 'Register Success');
+
     }
+
 
     /**
      * Show the form for editing the specified resource.
