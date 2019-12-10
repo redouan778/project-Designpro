@@ -81,7 +81,6 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo 'd';
     }
 
     /**
