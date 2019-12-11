@@ -217,3 +217,12 @@ table.table .avatar {
 .modal form label {
     font-weight: normal;
 }
+
+@media (min-width: 768px) {
+    .navbar-collapse.collapse {
+        display: block !important;
+        height: auto !important;
+        padding-left: 81%;
+        overflow: visible !important;
+    }
+}
